@@ -1,0 +1,24 @@
+import pandas as pd
+
+# Define the correct file path
+file_path = "/Users/logangriglione/Downloads/CO2 Emissions_Canada.csv.xls"
+
+# Try loading as CSV instead of Excel
+df = pd.read_csv(file_path)
+
+# Calculate mean CO2 emissions by cylinders
+mean_emissions_by_cylinders = df.groupby('Cylinders')['CO2 Emissions(g/km)'].mean()
+
+# Print the results
+print("\nMean CO2 Emissions by Cylinders:")
+print(mean_emissions_by_cylinders)
+
+# Visualize the results
+plt.figure(figsize=(10, 6))
+mean_emissions_by_cylinders.sort_values().plot(kind='bar')
+plt.title('Average CO2 Emissions by Cylinders')
+plt.xlabel('Cylinders')
+plt.ylabel('Average CO2 Emissions (g/km)')
+plt.show()
+
+
