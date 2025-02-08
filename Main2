@@ -1,0 +1,30 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Define the correct file path
+file_path = "/Users/logangriglione/Downloads/CO2 Emissions_Canada.csv.xls"
+
+# Try loading as CSV instead of Excel
+df = pd.read_csv(file_path)
+
+# Display the first few rows to inspect the dataset
+print("✅ Dataset loaded successfully!")
+print(df.head())
+print("\n🔹 Column Names:", df.columns.tolist())  # Show column names
+
+# Calculate mean CO2 emissions by make, model, and brand
+mean_emissions_by_make = df.groupby('Make')['CO2 Emissions(g/km)'].mean()
+
+# Print the results
+print("\nMean CO2 Emissions by Make:")
+print(mean_emissions_by_make)
+
+
+# Visualize the results
+plt.figure(figsize=(10, 6))
+mean_emissions_by_make.sort_values().plot(kind='bar')
+plt.title('Average CO2 Emissions by Make')
+plt.xlabel('Make')
+plt.ylabel('Average CO2 Emissions (g/km)')
+plt.show()
+
